@@ -26,7 +26,7 @@
                         </x-nav-link>
                     @endrole
                     @can('lihat daftar buku')
-                        <x-nav-link :href="route('buku.index')" :active="request()->routeIs('buku.index')">
+                        <x-nav-link :href="route('buku.daftar')" :active="request()->routeIs('buku.daftar')">
                             {{ __('Daftar Buku') }}
                         </x-nav-link>
                     @endcan
@@ -129,7 +129,7 @@
                 </x-responsive-nav-link>
             @endrole
             @can('lihat daftar buku')
-                <x-responsive-nav-link :href="route('buku.index')" :active="request()->routeIs('buku.index')">
+                <x-responsive-nav-link :href="route('buku.daftar')" :active="request()->routeIs('buku.daftar')">
                     {{ __('Daftar Buku') }}
                 </x-responsive-nav-link>
             @endcan

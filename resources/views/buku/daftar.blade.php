@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot name="header"><h2 class="font-semibold text-xl text-gray-800 leading-tight">Daftar Buku (render Blade)</h2></x-slot>
+    <x-slot name="header"><h2 class="font-semibold text-xl text-gray-800 leading-tight">Daftar Buku</h2></x-slot>
     <div class="py-12"><div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white shadow-sm sm:rounded-lg p-6">
             <x-flash />
@@ -11,6 +11,7 @@
                     <th class="border p-2">Kategori</th><th class="border p-2">Judul</th>
                     <th class="border p-2">Penulis</th><th class="border p-2">Tahun</th>
                     @can('kelola-buku')<th class="border p-2">Aksi</th>@endcan
+                    @can('mengajukan peminjaman buku')<th class="border p-2">Peminjaman</th>@endcan
                 </tr></thead>
                 <tbody>
                 @forelse ($bukus as $b)
@@ -31,9 +32,18 @@
                             </div>
                         </td>
                         @endcan
+                        @can('mengajukan peminjaman buku')
+                        <td class="border p-2">
+                            <form method="POST" action="{{ route('peminjaman.store') }}">
+                                @csrf
+                                <input type="hidden" name="buku_id" value="{{ $b->id }}">
+                                <button class="px-3 py-1 bg-blue-600 text-white rounded">Ajukan Pinjam</button>
+                            </form>
+                        </td>
+                        @endcan
                     </tr>
                 @empty
-                    <tr><td colspan="5" class="border p-2 text-center">Belum ada buku.</td></tr>
+                    <tr><td colspan="6" class="border p-2 text-center">Belum ada buku.</td></tr>
                 @endforelse
                 </tbody>
             </table>
